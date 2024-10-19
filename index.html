@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #chatWindow {
+            border: 1px solid #ccc;
+            width: 400px;
+            height: 300px;
+            overflow-y: scroll;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+        }
+        #chatInput {
+            width: 300px;
+        }
+        #sendButton {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Chat do Minecraft</h2>
+<div id="chatWindow"></div>
+<input type="text" id="chatInput" placeholder="Digite sua mensagem..." />
+<button id="sendButton">Enviar</button>
+
+<script>
+    const chatWindow = document.getElementById('chatWindow');
+    const chatInput = document.getElementById('chatInput');
+    const sendButton = document.getElementById('sendButton');
+
+    const username = "maxgfortes"; // ID do usuário (exemplo)
+
+    function sendMessage() {
+        const message = chatInput.value;
+        if (message) {
+            const fullMessage = `${username} - ${message}`;
+            const messageElement = document.createElement('div');
+            messageElement.textContent = fullMessage;
+            chatWindow.appendChild(messageElement);
+            chatInput.value = ''; // Limpa a entrada de texto
+            chatWindow.scrollTop = chatWindow.scrollHeight; // Rola para baixo
+        }
+    }
+
+    sendButton.addEventListener('click', sendMessage);
+
+    // Permitir enviar mensagem pressionando Enter
+    chatInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
+</script>
+
+</body>
+</html>
